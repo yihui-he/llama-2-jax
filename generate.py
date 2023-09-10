@@ -15,7 +15,7 @@ from lib.multihost_utils import shard_array, shard_model_params
 from lib.param_utils import load_params
 from lib.seeding import BEST_INTEGER
 
-tokenizer = LlamaTokenizer.from_pretrained('../llama-weights/llama2-7B')
+tokenizer = LlamaTokenizer.from_pretrained('NousResearch/Llama-2-7b-hf')
 tokenizer.pad_token = tokenizer.eos_token  # TODO: verify this
 sentences = [
     'I believe the meaning of life is',
@@ -24,7 +24,7 @@ sentences = [
 ]
 
 def main() -> None:
-    initialise_tpu('v4-16', n_devices=8, rank=0)
+    initialise_tpu('v3-8', n_devices=8, rank=0)
     is_process_0 = jax.process_index() == 0
     if is_process_0:
         print(jax.devices)

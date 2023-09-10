@@ -48,7 +48,7 @@ def main() -> None:
     n_epochs = 7
     seed = 3407
 
-    initialise_tpu('v4-16', n_devices=8, rank=0)
+    initialise_tpu('v3-8', n_devices=8, rank=0)
     is_process_0 = jax.process_index() == 0
     cpu_device = jax.devices('cpu')[0]
 
@@ -58,7 +58,7 @@ def main() -> None:
         initialise_tracking()
 
     key = rand.PRNGKey(seed)
-    tokenizer = LlamaTokenizer.from_pretrained('../llama-weights/llama2-7B')
+    tokenizer = LlamaTokenizer.from_pretrained('NousResearch/Llama-2-7b-hf')
     dataset = GSMDataset(split='train')
     collate_fn = partial(gsm_collate_fn_train, tokenizer, max_len)
     dataloader = LlamaDataLoader(dataset, collate_fn, batch_size, seed)

@@ -16,7 +16,7 @@ from lib.proc_init_utils import initialise_tpu
 from lib.seeding import BEST_INTEGER, HASHED_BUDDHA
 
 def main() -> None:
-    initialise_tpu('v4-16', n_devices=8, rank=0)
+    initialise_tpu('v3-8', n_devices=8, rank=0)
     is_process_0 = jax.process_index() == 0
     if is_process_0:
         jax_smi.initialise_tracking(interval=0.5)
